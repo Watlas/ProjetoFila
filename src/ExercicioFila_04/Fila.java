@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fila;
+package ExercicioFila_04;
+
+import java.util.Arrays;
 
 /**
  * @author watla
@@ -15,6 +17,10 @@ public class Fila {
     int fim;
     int quantidadeDeElementos;
     int[] array;
+
+    public Fila() {
+        this(10);
+    }
 
     public Fila(int tamanho) {
         if (tamanho <= 0) {
@@ -41,17 +47,19 @@ public class Fila {
 
     public void enqueue(int elemento) {
         if (quantidadeDeElementos == tamanho) {
-            throw new RuntimeException("Fila CHEAIA");
+            throw new RuntimeException("Fila cheia");
         }
-        array[fim] = elemento;
-        fim = (fim + 1) % tamanho;
+        this.array[this.fim] = elemento;
+        this.fim = (this.fim + 1) % this.tamanho;
+        ++this.quantidadeDeElementos;
+
     }
 
 
     public void dequeue() {
-        if (!empty()) {
+        if (empty())
             throw new RuntimeException("Fila Vazia");
-        }
+
         inicio = (inicio + 1) % tamanho;
         quantidadeDeElementos--;
     }
@@ -72,23 +80,34 @@ public class Fila {
 
     public String mostrar() {
         String elementos = "";
-        for (int i = inicio; i <= fim; i++) {
+        for (int i = 0; i <= inicio; i++) {
             elementos += array[i] + " - ";
         }
         return elementos;
 
     }
 
+    public void furaFila(int elemento) {
+            //inicio é o primeiro da fila (primeiro a entrar - primeiro a sair)
+            this.inicio--;
+            if (this.inicio < 0) {
+                this.inicio = this.array.length - 1;
+            }
+
+            array[this.inicio] = elemento;
+            fim = (fim + 1) % tamanho;
+            ++quantidadeDeElementos;
+
+    }
+
     public static void main(String[] args) {
-        Fila f = new Fila(4);
+        Fila f = new Fila();
         f.enqueue(10);
         f.enqueue(12);
+        f.furaFila(1);
+        System.out.println(f.peek());
+        System.out.println(f.mostrar());
 
-
-        String aux = f.mostrar();
-        System.out.println(aux);
-        f.dequeue();
-        f.mostrar();
 
     }
 }

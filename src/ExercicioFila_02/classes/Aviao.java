@@ -51,7 +51,7 @@ public class Aviao {
 
     @Override
     public java.lang.String toString() {
-        return "Aviao{" +
+        return "Aviao:" +
                 "nome:" + nome +
                 " idAviao:" + idAviao +
                 " companhiaAeria:" + companhia.toString() +

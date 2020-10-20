@@ -27,6 +27,10 @@ public class main {
                     break;
                 case "2":
                     System.out.println();
+                    if(filaAviao.empty()){
+                        System.out.println("Não existem avioes na fila".toUpperCase());
+                        break;
+                    }
                     filaAviao.dequeue();
                     System.out.println(filaAviao.peek() + "\n ACABOU DE DECOLAR!");
                     System.out.println();

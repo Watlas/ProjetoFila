@@ -79,24 +79,27 @@ public class Fila {
 
 
     public String mostrar() {
+        int x = inicio;
         String elementos = "";
-        for (int i = 0; i <= inicio; i++) {
-            elementos += array[i] + " - ";
+
+        for (int i = 0; i < quantidadeDeElementos; i++) {
+            elementos += array[x] + " - ";
+            x = (x + 1) % tamanho;
         }
+
+
         return elementos;
 
     }
 
     public void furaFila(int elemento) {
-            //inicio é o primeiro da fila (primeiro a entrar - primeiro a sair)
-            this.inicio--;
-            if (this.inicio < 0) {
-                this.inicio = this.array.length - 1;
-            }
+        this.inicio--;
+        if (this.inicio < 0) {
+            this.inicio = this.array.length - 1;
+        }
 
-            array[this.inicio] = elemento;
-            fim = (fim + 1) % tamanho;
-            ++quantidadeDeElementos;
+        array[this.inicio] = elemento;
+        ++quantidadeDeElementos;
 
     }
 
@@ -105,6 +108,9 @@ public class Fila {
         f.enqueue(10);
         f.enqueue(12);
         f.furaFila(1);
+        f.enqueue(50);
+        f.furaFila(90);
+
         System.out.println(f.peek());
         System.out.println(f.mostrar());
 
